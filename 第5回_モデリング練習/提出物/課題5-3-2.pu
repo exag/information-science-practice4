@@ -1,0 +1,48 @@
+@startuml 5-3-2
+actor 教員
+participant "画面・コントローラ" as controller
+participant "授業担当者情報" as model
+participant "出席情報" as model2
+
+activate 教員
+
+教員 -> controller : 授業情報入力
+activate controller
+controller -> model : 担当授業問い合わせ
+activate model
+controller <-- model : 授業一覧
+deactivate model
+controller -> controller : 授業一覧を表示
+activate controller
+deactivate controller
+教員 <-- controller
+deactivate controller
+
+教員 -> controller : 授業選択
+activate controller
+controller -> controller : アップロード画面を表示
+activate controller
+deactivate controller
+教員 <-- controller
+deactivate controller
+
+教員 -> controller : CSVファイルを指定
+activate controller
+controller -> model2 : CSVファイルを送信
+activate model2
+model2 -> model2 : フォーマットチェック
+activate model2
+deactivate model2
+model2 -> model2 : データ保存
+activate model2
+deactivate model2
+controller <-- model2 : 保存結果
+deactivate model2
+controller -> controller : 保存結果を表示
+activate controller
+deactivate controller
+教員 <-- controller
+deactivate controller
+
+
+@enduml

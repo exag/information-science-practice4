@@ -1,0 +1,32 @@
+@startuml 5-3-1
+actor 学生
+participant "画面・コントローラ" as controller
+participant "授業履修者情報" as model
+participant "出席情報" as model2
+
+activate 学生
+
+学生 -> controller : ID入力
+activate controller
+controller -> model : 履修授業問い合わせ
+activate model
+controller <-- model : 授業一覧
+deactivate model
+controller -> controller : 授業一覧を表示
+activate controller
+deactivate controller
+学生 <-- controller
+deactivate controller
+
+学生 -> controller : 授業選択
+activate controller
+controller -> model2 : 出席情報問い合わせ
+activate model2
+controller <-- model2 : 出席一覧
+deactivate model2
+controller -> controller : 出席一覧を表示
+activate controller
+deactivate controller
+学生 <-- controller
+deactivate controller
+@enduml

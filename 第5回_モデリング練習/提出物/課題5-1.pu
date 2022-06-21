@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+actor 教員
+actor 教員以外の職員
+actor 学生
+actor 携帯出席確認システム
+rectangle 出席管理システム {
+  usecase 出席情報登録
+  usecase 出席情報検索
+  usecase 出席情報確認
+'   usecase Pay for Food
+'   usecase Drink
+}
+携帯出席確認システム --> 出席情報登録
+教員 --> 出席情報登録
+教員 --> 出席情報確認
+出席情報確認 <-- 教員以外の職員
+出席情報検索 <-- 教員以外の職員
+出席情報確認 <-- 学生
+教員 --> 出席情報検索
+
+@enduml
