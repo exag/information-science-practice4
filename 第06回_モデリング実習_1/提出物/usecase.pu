@@ -1,0 +1,34 @@
+@startuml sub6
+left to right direction
+actor 職員
+actor IDありユーザ
+actor IDなしユーザ
+rectangle 予約システム {
+  usecase 空き状況確認
+  usecase ユーザ認証
+  usecase 予約情報登録
+  usecase 予約状況確認
+  usecase 予約キャンセル
+  usecase 予約情報修正
+  usecase ユーザ情報登録
+  usecase ユーザ情報編集
+  usecase ユーザ情報削除
+  usecase ユーザパスワード再設定
+}
+IDなしユーザ --> 空き状況確認
+IDありユーザ --> 空き状況確認
+IDありユーザ --> ユーザ認証
+IDありユーザ --> 予約情報登録
+IDありユーザ --> 予約状況確認
+IDありユーザ --> 予約キャンセル
+空き状況確認 <-- 職員
+予約状況確認 <-- 職員
+予約情報登録 <-- 職員
+予約キャンセル <-- 職員
+予約情報修正 <-- 職員
+ユーザ情報登録 <-- 職員
+ユーザ情報編集 <-- 職員
+ユーザ情報削除 <-- 職員
+ユーザパスワード再設定 <-- 職員
+
+@enduml
