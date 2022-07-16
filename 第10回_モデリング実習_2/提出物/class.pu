@@ -1,0 +1,58 @@
+@startuml 設計レベルのクラス図
+
+class メインプログラム
+Entity ユーザ {
+  ID: String
+  名前: String
+  住所: String
+  電話番号: String
+  メールアドレス: String
+  パスワード: String
+}
+Entity 予約 {
+  予約日: int
+  開始時刻: int
+  終了時刻: int
+  予約者ID: String
+  予約者施設名: String
+
+}
+Entity 施設 {
+  施設名: String
+  開放開始時刻: int
+  開放終了時刻: int
+  種類: String
+}
+class メイン画面
+class 予約画面
+class キャンセル画面
+class ログイン画面
+class コントローラ {
+  ユーザID: String
+  ログイン()
+  ログイン状況確認()
+  予約重複確認()
+  予約検索()
+  予約登録()
+  予約削除()
+}
+
+メインプログラム --> コントローラ
+メインプログラム -l-> メイン画面
+
+メインプログラム -[hidden]right-> ユーザ
+
+コントローラ --right- 予約
+コントローラ --right- ユーザ
+コントローラ --right- 施設
+
+コントローラ -left- メイン画面
+
+コントローラ --- 予約画面
+コントローラ --- キャンセル画面
+コントローラ --- ログイン画面
+
+予約 -up- ユーザ
+予約 -down- 施設
+
+@enduml

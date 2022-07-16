@@ -1,0 +1,48 @@
+@startuml 予約をキャンセルする機能
+
+actor 登録ユーザ as user
+participant "ビュー（メイン画面）" as view1
+participant "ビュー（キャンセル画面）" as view2
+participant "コントローラ" as controller
+participant "モデル（予約）" as model
+
+activate user
+
+user ->  view1 : 予約キャンセル要求
+activate view1
+view1 -> controller : 予約キャンセル処理
+activate controller
+
+controller -> controller : ログイン状況確認
+activate controller
+deactivate controller
+
+controller -> model : ユーザの予約を検索
+activate model
+controller <-- model
+deactivate model
+
+controller -> view2 : 画面表示
+activate view2
+user -> view2 : キャンセルする予約を選択
+view2 --> controller
+deactivate view2
+
+
+controller -> model : 予約削除
+activate model
+controller <-- model
+deactivate model
+
+
+deactivate model
+view1 <-- controller
+deactivate controller
+
+view1 -> view1 : 結果表示
+activate view1
+deactivate view1
+
+user <-- view1
+
+@enduml

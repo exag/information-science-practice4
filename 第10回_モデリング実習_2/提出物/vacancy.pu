@@ -1,0 +1,27 @@
+@startuml 施設の空き状況確認する機能
+
+actor 一般ユーザ as user
+participant "ビュー（メイン画面）" as view
+participant "コントローラ" as controller
+participant "モデル（予約）" as model
+
+activate user
+
+user ->  view : 空き情報確認要求
+activate view
+view -> controller : 予約状況確認処理
+activate controller
+controller -> model : 予約検索
+activate model
+controller <-- model
+deactivate model
+view <-- controller
+deactivate controller
+
+view -> view : 予約状況を表示
+activate view
+deactivate view
+
+user <-- view
+
+@enduml

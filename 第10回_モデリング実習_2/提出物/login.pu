@@ -1,0 +1,37 @@
+@startuml ログイン機能
+
+actor 登録ユーザ as user
+participant "ビュー（メイン画面）" as view1
+participant "ビュー（キャンセル画面）" as view2
+participant "コントローラ" as controller
+participant "モデル（ユーザ）" as model
+
+activate user
+
+user ->  view1 : ログイン要求
+activate view1
+view1 -> controller : ログイン処理
+activate controller
+
+controller -> view2 : 画面表示
+activate view2
+user -> view2 : ID/Pass入力
+view2 --> controller
+deactivate view2
+
+controller -> model : ユーザ検索
+activate model
+controller <-- model
+deactivate model
+
+controller -> controller : 認証処理
+activate controller
+deactivate controller
+
+deactivate model
+view1 <-- controller
+deactivate controller
+
+user <-- view1
+
+@enduml

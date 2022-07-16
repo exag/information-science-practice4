@@ -1,0 +1,32 @@
+@startuml 自分の予約状況を確認する機能
+
+actor 登録ユーザ as user
+participant "ビュー（メイン画面）" as view
+participant "コントローラ" as controller
+participant "モデル（予約）" as model
+
+activate user
+
+user ->  view : 自分の予約状況確認要求
+activate view
+view -> controller : 予約状況確認処理
+activate controller
+
+controller -> controller : ログイン状況確認
+activate controller
+deactivate controller
+
+controller -> model : ユーザの予約を検索
+activate model
+controller <-- model
+deactivate model
+view <-- controller
+deactivate controller
+
+view -> view : 予約状況を表示
+activate view
+deactivate view
+
+user <-- view
+
+@enduml

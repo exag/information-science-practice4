@@ -1,0 +1,51 @@
+@startuml 施設を予約する機能
+
+actor 登録ユーザ as user
+participant "ビュー（メイン画面）" as view1
+participant "ビュー（予約画面）" as view2
+participant "コントローラ" as controller
+participant "モデル（予約）" as model
+
+activate user
+
+user ->  view1 : 予約登録要求
+activate view1
+view1 -> controller : 予約登録処理
+activate controller
+
+controller -> controller : ログイン状況確認
+activate controller
+deactivate controller
+
+controller -> view2 : 画面表示
+activate view2
+user -> view2 : 予約情報入力
+view2 --> controller
+deactivate view2
+
+controller -> model : 対象日の対象施設の予約を検索
+activate model
+controller <-- model
+deactivate model
+
+controller -> controller : 予約重複確認処理
+activate controller
+deactivate controller
+
+controller -> model : 予約登録
+activate model
+controller <-- model
+deactivate model
+
+
+deactivate model
+view1 <-- controller
+deactivate controller
+
+view1 -> view1 : 結果表示
+activate view1
+deactivate view1
+
+user <-- view1
+
+@enduml
